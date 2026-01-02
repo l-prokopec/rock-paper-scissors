@@ -23,7 +23,7 @@ function playRound(humanChoice, computerChoice) {
         (humanChoice === "scissors" && computerChoice === "paper")
     ) {
         console.log(`You win! ${humanChoice[0].toUpperCase() + humanChoice.slice(1)} beats ${computerChoice[0].toUpperCase() + computerChoice.slice(1)}.`);
-        return "humanWins";
+        return "humanWinsRound";
     }
     else if (
         (humanChoice === "rock" && computerChoice === "paper") ||
@@ -31,26 +31,51 @@ function playRound(humanChoice, computerChoice) {
         (humanChoice === "scissors" && computerChoice === "rock")
     ) {
         console.log(`You loose! ${humanChoice[0].toUpperCase() + humanChoice.slice(1)} looses to ${computerChoice[0].toUpperCase() + computerChoice.slice(1)}.`);
-        return "computerWins";
+        return "computerWinsRound";
     }
-    else {
+    else if (
+        (humanChoice === "rock" && computerChoice === "rock") ||
+        (humanChoice === "paper" && computerChoice === "paper") ||
+        (humanChoice === "scissors" && computerChoice === "scissors")) {
         console.log("It's a draw!");
         return "draw";
+    }
+}
+
+
+function playGame() {
+    while (humanScore < 5 && computerScore < 5) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        const roundWinner = playRound(humanSelection, computerSelection); 
+
+        if ( roundWinner === "humanWinsRound") {
+            humanScore += 1;
+        }
+        else if (roundWinner === "computerWinsRound") {
+            computerScore += 1;
+        }
+
+        console.log(`Current score is: You ${humanScore} : Computer ${computerScore}`)
+    }
+
+    if (humanScore === 5) {
+        return "humanIsWinner";
+    }
+    else if (computerScore === 5) {
+        return "computerIsWinner"
     }
 }
 
 humanScore = 0;
 computerScore = 0;
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-const winner = playRound(humanSelection, computerSelection);
+const gameWinner = playGame()
 
-if (winner === "humanWins") {
-    humanScore += 1;
-}
-else if (winner === "computerWins") {
-    computerScore += 1;
-}
 
-console.log(`Current score is: You ${humanScore} : Computer ${computerScore}`)
+if (gameWinner === "humanIsWinner") {
+    console.log("You won!");
+}
+else if (gameWinner === "computerIsWinner") {
+    console.log("You lost!");
+}
