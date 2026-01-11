@@ -1,0 +1,144 @@
+/* --- Base --- */
+* { box-sizing: border-box; }
+
+:root{
+  --bg: #0f172a;
+  --panel: rgba(255,255,255,0.06);
+  --panel-2: rgba(255,255,255,0.10);
+  --border: rgba(255,255,255,0.14);
+  --text: #e5e7eb;
+  --muted: rgba(229,231,235,0.70);
+  --accent: #38bdf8;
+  --accent-2: #a78bfa;
+  --danger: #fb7185;
+}
+
+body{
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(56,189,248,0.18), transparent 60%),
+    radial-gradient(900px 600px at 80% 0%, rgba(167,139,250,0.16), transparent 60%),
+    var(--bg);
+  padding: 24px;
+}
+
+/* Wrap your existing content without changing HTML:
+   styles target the body direct children and existing ids */
+body > div{
+  width: min(680px, 92vw);
+}
+
+h1, h2, h3 { margin: 0; }
+
+/* --- Controls --- */
+#controls{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+#controls button{
+  appearance: none;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+  color: var(--text);
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: transform .08s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.22);
+}
+
+#controls button:hover{
+  border-color: rgba(56,189,248,0.45);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.26), 0 0 0 4px rgba(56,189,248,0.10);
+}
+
+#controls button:active{
+  transform: translateY(1px);
+}
+
+#controls button:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(56,189,248,0.18), 0 14px 30px rgba(0,0,0,0.26);
+}
+
+/* --- Message panel --- */
+#round, #result{
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+#round{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#result{
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  white-space: pre-line; /* keep your newline formatting */
+}
+
+/* Make win/lose text pop a bit (based on content) */
+#result:empty{ display:none; }
+#round:empty{ display:none; }
+
+/* --- Play again area --- */
+#playDiv{
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+#playDiv button{
+  appearance: none;
+  border: 1px solid rgba(56,189,248,0.45);
+  background: linear-gradient(180deg, rgba(56,189,248,0.20), rgba(56,189,248,0.10));
+  color: var(--text);
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.28), 0 0 0 4px rgba(56,189,248,0.08);
+}
+
+#playDiv button:hover{
+  border-color: rgba(56,189,248,0.70);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.30), 0 0 0 6px rgba(56,189,248,0.10);
+}
+
+#playDiv button:active{
+  transform: translateY(1px);
+}
+
+/* --- Responsive --- */
+@media (max-width: 520px){
+  #controls{
+    flex-direction: column;
+  }
+  #controls button{
+    width: 100%;
+  }
+}
